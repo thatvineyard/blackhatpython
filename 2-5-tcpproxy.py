@@ -14,7 +14,7 @@ HEX_FILTER = "".join(
 
 def hexdump(src, length=16, show=True):
     if isinstance(src, bytes):
-        src = src.decode()
+        src = src.decode(errors='replace')
 
     results = list()
     for i in range(0, len(src), length):

@@ -1,0 +1,71 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python Debugger: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Netcat (send)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${cwd}/2-4-netcat.py",
+      "args": ["--target=127.0.0.1", "--port=5555"],
+      "console": "integratedTerminal",
+      "consoleName": "Netcat (send)",
+    },
+    {
+      "name": "Netcat (send tcpbin.com)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${cwd}/2-4-netcat.py",
+      "args": ["--target=tcpbin.com", "--port=4242", "--buffer=ABCDEFGHIJKLMNOP"],
+      "console": "integratedTerminal",
+      "consoleName": "Netcat (send)",
+    },
+    {
+      "name": "Netcat (listen)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${cwd}/2-4-netcat.py",
+      "args": ["--listen", "--command", "--target=127.0.0.1", "--port=5555"],
+      "console": "integratedTerminal",
+      "consoleName": "Netcat (listen)",
+    },
+    {
+      "name": "TCP Proxy",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${cwd}/2-5-tcpproxy.py",
+      "args": ["127.0.0.1", "5555", "google.com", "80", "false"],
+      "console": "integratedTerminal",
+      "consoleName": "TCP Proxy",
+    },
+    {
+      "name": "SSH Command",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${cwd}/2-6-sshcmd.py",
+      "console": "integratedTerminal",
+      "consoleName": "SSH Command",
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Server/Client",
+      "configurations": ["Netcat (listen)", "Netcat (send)"],
+      "stopAll": true,
+    },
+    {
+      "name": "Proxy and Client",
+      "configurations": ["Netcat (send)", "TCP Proxy"],
+      "stopAll": true,
+    },
+  ]
+}

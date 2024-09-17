@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Black Hat Python",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

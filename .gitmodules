@@ -1,0 +1,3 @@
+[submodule "dvwp"]
+	path = dvwp
+	url = https://github.com/vavkamil/dvwp.git

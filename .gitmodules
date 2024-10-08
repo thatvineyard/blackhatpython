@@ -1,3 +1,9 @@
 [submodule "dvwp"]
 	path = dvwp
 	url = https://github.com/vavkamil/dvwp.git
+[submodule "SVNDigger"]
+	path = SVNDigger
+	url = git@github.com:nathanmyee/SVNDigger.git
+[submodule "DVWA"]
+	path = DVWA
+	url = git@github.com:digininja/DVWA.git

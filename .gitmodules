@@ -7,3 +7,6 @@
 [submodule "DVWA"]
 	path = DVWA
 	url = git@github.com:digininja/DVWA.git
+[submodule "SecLists"]
+	path = SecLists
+	url = git@github.com:danielmiessler/SecLists.git

